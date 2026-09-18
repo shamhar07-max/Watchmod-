@@ -6,6 +6,9 @@ import { prisma } from "@/lib/prisma";
 export const { handlers, auth, signIn, signOut } = NextAuth({
   session: { strategy: "jwt" },
   pages: { signIn: "/admin/login" },
+  // Self-hosted behind whatever host/proxy the client puts in front of it —
+  // there's no fixed public origin to pin AUTH_URL to ahead of time.
+  trustHost: true,
   providers: [
     Credentials({
       name: "Credentials",
